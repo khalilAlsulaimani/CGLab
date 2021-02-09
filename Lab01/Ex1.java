@@ -84,13 +84,13 @@ class DrawingPanal2 extends JPanel {
         //gray rectangle bottem left corner 
         Rectangle2D.Double recGray = new Rectangle2D.Double(50, 550, 250, 150);
         g2.setColor(Color.gray);
-        g2.fillRect(50, 550, 250, 150);
+        g2.fill(recGray);
 
         // yellow eclipse width 250 and height 150 
         // Ellipse2D.Double  elps = new Ellipse2D.Double(x, y, width, height);
         Ellipse2D.Double oval = new Ellipse2D.Double(500,550,250,150);
         g2.setColor(Color.yellow);
-        g2.fillOval(500,550,250, 150);
+        g2.fill(oval);
         
         
         //drawing string 
