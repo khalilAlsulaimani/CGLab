@@ -115,14 +115,17 @@ class DrawingPanal extends JPanel {
         g2.fill(polyShape);
 
         g2.setColor(Color.black);
-        for (int i = 0; i < 100; i++) {
 
-            xDot[i] = xPoly[2];
-            yDot[i] = yPoly[2];
-            
+        count = count % 100;
+        xDot[count] = xPoly[2];
+        yDot[count] = yPoly[2];
+
+        g2.drawLine(xDot[count], yDot[count], xDot[count], yDot[count]);
+
+        for (int i = 0; i < count; i++) {
+            g2.drawLine(xDot[i], yDot[i], xDot[i], yDot[i]);
         }
-        
-       ''
+
     }
 
     private class KeyPressListener extends KeyAdapter {
@@ -135,15 +138,19 @@ class DrawingPanal extends JPanel {
             switch (keyCode) {
                 case KeyEvent.VK_LEFT:
                     moveLeft();
+                    count++;
                     break;
                 case KeyEvent.VK_RIGHT:
                     moveRight();
+                    count++;
                     break;
                 case KeyEvent.VK_UP:
                     moveUp();
+                    count++;
                     break;
                 case KeyEvent.VK_DOWN:
                     moveDown();
+                    count++;
                     break;
 
             }
