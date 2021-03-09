@@ -65,8 +65,9 @@ class DrawingPanal extends JPanel {
     private static int xPoly[] = {x0, x1, x2}; // initialize array
     private static int yPoly[] = {y0, y1, y2};
 
-    private static int[] xDot = new int[100];
-    private static int[] yDot = new int[100];
+    private static final int arrSize = 100;
+    private static int[] xDot = new int[arrSize];
+    private static int[] yDot = new int[arrSize];
     private static int count = 0;
 
     // the values that the arrow key input effects the shape in 
@@ -114,18 +115,16 @@ class DrawingPanal extends JPanel {
         g2.setColor(Color.green);
         g2.fill(polyShape);
 
-        g2.setColor(Color.black);
+        
 
-        count = count % 100;
-        xDot[count] = xPoly[2];
-        yDot[count] = yPoly[2];
-
-        g2.drawLine(xDot[count], yDot[count], xDot[count], yDot[count]);
+        
 
         for (int i = 0; i < count; i++) {
+            g2.setColor(Color.black);
             g2.drawLine(xDot[i], yDot[i], xDot[i], yDot[i]);
         }
 
+        count++;
     }
 
     private class KeyPressListener extends KeyAdapter {
@@ -138,20 +137,26 @@ class DrawingPanal extends JPanel {
             switch (keyCode) {
                 case KeyEvent.VK_LEFT:
                     moveLeft();
-                    count++;
                     break;
                 case KeyEvent.VK_RIGHT:
                     moveRight();
-                    count++;
                     break;
                 case KeyEvent.VK_UP:
                     moveUp();
-                    count++;
                     break;
                 case KeyEvent.VK_DOWN:
                     moveDown();
-                    count++;
                     break;
+
+            }
+            if (keyCode == KeyEvent.VK_LEFT | keyCode == KeyEvent.VK_RIGHT | keyCode == KeyEvent.VK_UP | keyCode == KeyEvent.VK_DOWN) {
+                xDot[count] = xPoly[2];
+                yDot[count] = yPoly[2];
+                count++;
+                
+                if (count == arrSize) {
+                    count = 0;
+                }
 
             }
             msgTextFild.setText(msg + " (x , y) = " + xPoly[2] + " , " + yPoly[2]);
